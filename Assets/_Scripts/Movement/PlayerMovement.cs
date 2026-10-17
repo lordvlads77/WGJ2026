@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     
     private float _moveSpeed;
    
-    private Vector2 _moveDirection;
+    private Vector3 _moveDirection;
 
     private bool _isMoving;
 
@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
     void OnPlayerMovement(bool isMoving, Vector2 direction)
     {
         _isMoving = isMoving;
-        _moveDirection = direction;
+        _moveDirection = new Vector3(direction.x, 0, direction.y);
         StartCoroutine(MovementCoroutine());
     }
 }

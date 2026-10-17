@@ -61,7 +61,7 @@ public class InputManager : MonoBehaviour
 
     
 
-    void OnMovePerformed(bool isMoving, Vector2 direction)
+    void OnMovePerformed(bool isMoving, Vector3 direction)
     {
         _isMoving = true;
         _moveDirection = direction;
@@ -71,7 +71,7 @@ public class InputManager : MonoBehaviour
     void OnMoveCancelled()
     {
         _isMoving = false;
-        _moveDirection = Vector2.zero;
+        _moveDirection = Vector3.zero;
         _onMoveAction?.Invoke(_isMoving, _moveDirection);
     }
     
