@@ -29,8 +29,6 @@ public class InputManager : MonoBehaviour
     void Awake()
     {
         _onJumpAction = PlayerEvents.RaiseJumpPerformed;
-        _onHorizontalMoveAction = PlayerEvents.RaiseHorizontalMovePerformed;
-        _onVerticalMoveAction = PlayerEvents.RaiseVerticalMovePerformed;
         _onMoveAction = PlayerEvents.RaiseMovePerformed;
         _inputActions = new InputSystem_Actions();
         _verticalMoveAction = _inputActions.Player.VerticalMovement;
@@ -49,10 +47,6 @@ public class InputManager : MonoBehaviour
     {
         
         _inputActions.Enable();
-        _verticalMoveAction.performed += context => OnVerticalMove(_isMovingVertically, context.ReadValue<float>());
-        _horizontalMoveAction.performed += context => OnHorizontalMove(_isMovingHorizontally, context.ReadValue<float>());
-        _verticalMoveAction.canceled += context => OnVerticalMoveCancelled();
-        _horizontalMoveAction.canceled += context => OnHorizontalMoveCancelled();
         _moveAction.performed += context => OnMovePerformed(_isMoving, context.ReadValue<Vector2>());
         _moveAction.canceled += context => OnMoveCancelled();
         //_jumpAction.performed += OnJumpPerformed(_isJumping);
@@ -61,41 +55,11 @@ public class InputManager : MonoBehaviour
     void OnDisable()
     {
         _inputActions.Disable();
-        _verticalMoveAction.performed -= context => OnVerticalMove(_isMovingVertically, context.ReadValue<float>());
-        _horizontalMoveAction.performed -= context => OnHorizontalMove(_isMovingHorizontally, context.ReadValue<float>());
-        _verticalMoveAction.canceled -= context => OnVerticalMoveCancelled();
-        _horizontalMoveAction.canceled -= context => OnHorizontalMoveCancelled();
         _moveAction.performed -= context => OnMovePerformed(_isMoving, context.ReadValue<Vector2>());
         _moveAction.canceled -= context => OnMoveCancelled();
     }
 
-    private void OnVerticalMove(bool isMovingVertically, float direction)
-    {
-        _isMovingVertically = true;
-        _verticalMoveDirection = direction;
-        _onVerticalMoveAction?.Invoke(isMovingVertically, _verticalMoveDirection);
-    }
-
-    void OnVerticalMoveCancelled()
-    {
-        _isMovingVertically = false;
-        _verticalMoveDirection = 0;
-        _onVerticalMoveAction?.Invoke(false, _verticalMoveDirection);
-    }
-
-    void OnHorizontalMove(bool isMoving, float direction) 
-    {
-        _isMovingHorizontally = true;
-        _horizontalMoveDirection = direction;
-        _onHorizontalMoveAction?.Invoke(_isMovingHorizontally, _horizontalMoveDirection);
-    }
-
-    void OnHorizontalMoveCancelled()
-    {
-        _isMovingHorizontally = false;
-        _horizontalMoveDirection = 0;
-        _onHorizontalMoveAction?.Invoke(false, _horizontalMoveDirection);
-    }
+    
 
     void OnMovePerformed(bool isMoving, Vector2 direction)
     {
