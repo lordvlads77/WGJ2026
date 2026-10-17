@@ -45,36 +45,35 @@ public class InputManager : MonoBehaviour
 
     void OnEnable()
     {
-        
+
         _inputActions.Enable();
-        _moveAction.performed += context => OnMovePerformed(_isMoving, context.ReadValue<Vector2>());
-        _moveAction.canceled += context => OnMoveCancelled();
+
+        _moveAction.performed += OnMovePerformed;
+        _moveAction.canceled += OnMoveCancelled;
         //_jumpAction.performed += OnJumpPerformed(_isJumping);
     }
 
     void OnDisable()
     {
         _inputActions.Disable();
-        _moveAction.performed -= context => OnMovePerformed(_isMoving, context.ReadValue<Vector2>());
-        _moveAction.canceled -= context => OnMoveCancelled();
+        _moveAction.performed -= OnMovePerformed;
+        _moveAction.canceled -= OnMoveCancelled;
+
+        _inputActions.Disable();
     }
 
-    
-
-    void OnMovePerformed(bool isMoving, Vector3 direction)
+    private void OnMovePerformed(InputAction.CallbackContext context)
     {
-        _isMoving = true;
-        _moveDirection = direction;
-        _onMoveAction?.Invoke(_isMoving, _moveDirection);
+        Vector2 direction = context.ReadValue<Vector2>();
+
+        PlayerEvents.RaiseMovePerformed(true, direction);
     }
 
-    void OnMoveCancelled()
+    private void OnMoveCancelled(InputAction.CallbackContext context)
     {
-        _isMoving = false;
-        _moveDirection = Vector3.zero;
-        _onMoveAction?.Invoke(_isMoving, _moveDirection);
+        PlayerEvents.RaiseMovePerformed(false, Vector2.zero);
     }
-    
+
     void OnJumpPerformed(bool isJumping)
     {
         
