@@ -5,6 +5,7 @@ public static class PlayerEvents
 {
     public static event Action<bool, float> OnVerticalMove;
     public static event Action<bool, float> OnHorizontalMove;
+    public static event Action<bool, Vector2> OnMove;
     public static event Action<bool, float> OnLook;
     public static event Action<bool> OnJump;
     public static event Action<bool> onDeath;
@@ -18,6 +19,10 @@ public static class PlayerEvents
     public static void RaiseHorizontalMovePerformed(bool isMoving, float direction)
     {
         OnHorizontalMove?.Invoke(isMoving, direction);
+    }
+    public static void RaiseMovePerformed(bool isMoving, Vector2 direction)
+    {
+        OnMove?.Invoke(isMoving, direction);
     }
 
     public static void RaiseJumpPerformed(bool isJumping)

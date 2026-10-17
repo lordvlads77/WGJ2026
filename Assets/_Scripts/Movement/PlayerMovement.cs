@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -8,58 +9,46 @@ public class PlayerMovement : MonoBehaviour
     
     private Rigidbody _playerRigidbody;
     
-    private Action<bool, float> _onVerticalMoveAction;
-    private Action<bool, float> _onHorizontalMoveAction;
-
     private float _moveSpeed;
-    private float _horizontalMoveDirection;
-    private float _verticalMoveDirection;
-    
+   
+    private Vector2 _moveDirection;
+
+    private bool _isMoving;
+
+    private void Update()
+    {
+        Debug.Log("Direction: " + _moveDirection);
+    }
+
     private void Awake()
     {
         _playerRigidbody = GetComponent<Rigidbody>();
         _moveSpeed = _playerVariables.BaseMoveSpeed;
-        _onHorizontalMoveAction = PlayerEvents.RaiseHorizontalMovePerformed;
-        _onVerticalMoveAction = PlayerEvents.RaiseVerticalMovePerformed;
-        
     }
 
-    private void Start()
+    private IEnumerator MovementCoroutine()
     {
-       
+        while (_isMoving)
+        {
+            _playerRigidbody.AddForce(_moveDirection * _moveSpeed, ForceMode.Force);
+            yield return null;
+        }
     }
 
     private void OnEnable()
     {
-        _onHorizontalMoveAction += OnHorizontalMovement;
-        _onHorizontalMoveAction += OnVerticalMovement;
+        PlayerEvents.OnMove += OnPlayerMovement;
     }
 
     private void OnDisable()
     {
-        _onHorizontalMoveAction -= OnHorizontalMovement;
-        _onHorizontalMoveAction -= OnVerticalMovement;
+        PlayerEvents.OnMove -= OnPlayerMovement;
     }
 
-    private void OnHorizontalMovement(bool isMoving, float direction)
+    void OnPlayerMovement(bool isMoving, Vector2 direction)
     {
-        Debug.Log("horizontal direction: "+direction);
-        _horizontalMoveDirection = direction;
-        if (isMoving)
-        {
-            
-            _playerRigidbody.AddForce(new Vector3(direction, 0, 0),ForceMode.Force);
-                        
-        }
-    }
-    
-    private void OnVerticalMovement(bool isMoving, float direction)
-    {
-        Debug.Log("vertical direction: "+direction);
-        _verticalMoveDirection = direction;
-        if (isMoving)
-        {
-            _playerRigidbody.AddForce(new Vector3(0, 0, direction), ForceMode.Force);
-        }
+        _isMoving = isMoving;
+        _moveDirection = direction;
+        StartCoroutine(MovementCoroutine());
     }
 }
