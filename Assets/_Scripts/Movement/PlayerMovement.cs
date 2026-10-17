@@ -1,65 +1,97 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    
+
     [SerializeField] private PlayerVariables _playerVariables;
+    [SerializeField] private LayerMask _groundLayer;
     
     private Rigidbody _playerRigidbody;
-    
-    private Action<bool, float> _onVerticalMoveAction;
-    private Action<bool, float> _onHorizontalMoveAction;
-
     private float _moveSpeed;
-    private float _horizontalMoveDirection;
-    private float _verticalMoveDirection;
+    private Vector3 _moveDirection;
+    private bool _isGrounded = true;
+    private RaycastHit _hit;
+    private float _playerHeight;
+    private CapsuleCollider _capsuleCollider;
+    private float _rayCastDistance;
+    private float _groundCheckTimer = 0f;
+    private float _groundCheckDelay = 0.3f;
     
+
+    private void Update()
+    {
+        // Debug.Log("Direction: " + _moveDirection);
+    }
+
     private void Awake()
     {
+        _capsuleCollider = GetComponent<CapsuleCollider>();
         _playerRigidbody = GetComponent<Rigidbody>();
         _moveSpeed = _playerVariables.BaseMoveSpeed;
-        _onHorizontalMoveAction = PlayerEvents.RaiseHorizontalMovePerformed;
-        _onVerticalMoveAction = PlayerEvents.RaiseVerticalMovePerformed;
-        
     }
 
     private void Start()
     {
-       
+        _playerHeight = _capsuleCollider.height * transform.localScale.y;
+        _rayCastDistance = (_playerHeight / 2) + .2f;
     }
 
     private void OnEnable()
     {
-        _onHorizontalMoveAction += OnHorizontalMovement;
-        _onHorizontalMoveAction += OnVerticalMovement;
+        PlayerEvents.OnMove += OnPlayerMovement;
+        PlayerEvents.OnJump += OnPlayerJump;
     }
 
     private void OnDisable()
     {
-        _onHorizontalMoveAction -= OnHorizontalMovement;
-        _onHorizontalMoveAction -= OnVerticalMovement;
+        PlayerEvents.OnMove -= OnPlayerMovement;
+        PlayerEvents.OnJump -= OnPlayerJump;
     }
 
-    private void OnHorizontalMovement(bool isMoving, float direction)
+    private void FixedUpdate()
     {
-        Debug.Log("horizontal direction: "+direction);
-        _horizontalMoveDirection = direction;
-        if (isMoving)
-        {
-            
-            _playerRigidbody.AddForce(new Vector3(direction, 0, 0),ForceMode.Force);
-                        
-        }
+        MoveCharacter();
+        GroundCheck();
+    }
+
+    private void MoveCharacter()
+    {
+        Vector3 velocity = _playerRigidbody.linearVelocity;
+
+        velocity.x = _moveDirection.x * _moveSpeed;
+        velocity.z = _moveDirection.z * _moveSpeed;
+
+        _playerRigidbody.linearVelocity = velocity;
+    }
+
+    void OnPlayerMovement(bool isMoving, Vector2 direction)
+    {
+        _moveDirection = new Vector3(direction.x, 0f, direction.y);
+    }
+
+    private void OnPlayerJump(bool isJumping)
+    {
+        if (!_isGrounded) return;
+        _isGrounded = false;
+        _groundCheckTimer = _groundCheckDelay;
+        _playerRigidbody.AddForce(Vector3.up*_playerVariables.JumpForce, ForceMode.Impulse);
     }
     
-    private void OnVerticalMovement(bool isMoving, float direction)
+    private void GroundCheck()
     {
-        Debug.Log("vertical direction: "+direction);
-        _verticalMoveDirection = direction;
-        if (isMoving)
+        if (!_isGrounded && _groundCheckTimer <= 0f)
         {
-            _playerRigidbody.AddForce(new Vector3(0, 0, direction), ForceMode.Force);
+            Vector3 rayOrigin = transform.position + Vector3.up * 0.1f;
+            _isGrounded = Physics.Raycast(rayOrigin, Vector3.down, _rayCastDistance, _groundLayer);
+            Debug.DrawRay(rayOrigin, Vector3.down * _rayCastDistance, Color.red);
+        }
+        else
+        {
+            _groundCheckTimer -= Time.fixedDeltaTime;
         }
     }
+
+   
 }
