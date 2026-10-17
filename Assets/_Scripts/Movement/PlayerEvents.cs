@@ -40,4 +40,6 @@ public static class PlayerEvents
     {
         onGamePaused?.Invoke(isGamePaused);
     }
+    
+    
 }

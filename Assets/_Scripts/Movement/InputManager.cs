@@ -21,26 +21,12 @@ public class InputManager : MonoBehaviour
     private bool _isMoving = false;
     private bool _isJumping = false;
     
-    private Action<bool, float> _onVerticalMoveAction;
-    private Action<bool, float> _onHorizontalMoveAction;
-    private Action<bool, Vector2> _onMoveAction;
-    private Action<bool> _onJumpAction;
     
     void Awake()
     {
-        _onJumpAction = PlayerEvents.RaiseJumpPerformed;
-        _onMoveAction = PlayerEvents.RaiseMovePerformed;
         _inputActions = new InputSystem_Actions();
-        _verticalMoveAction = _inputActions.Player.VerticalMovement;
-        _horizontalMoveAction = _inputActions.Player.HorizontalMovement;
         _moveAction = _inputActions.Player.Movement;
         _jumpAction = _inputActions.Player.Jump;
-    }
-
-    private void Update()
-    {
-        //Debug.Log(_verticalMoveDirection);
-        //Debug.Log(_horizontalMoveDirection);
     }
 
     void OnEnable()
@@ -50,7 +36,7 @@ public class InputManager : MonoBehaviour
 
         _moveAction.performed += OnMovePerformed;
         _moveAction.canceled += OnMoveCancelled;
-        //_jumpAction.performed += OnJumpPerformed(_isJumping);
+        _jumpAction.performed += OnJumpPerformed;
     }
 
     void OnDisable()
@@ -74,9 +60,9 @@ public class InputManager : MonoBehaviour
         PlayerEvents.RaiseMovePerformed(false, Vector2.zero);
     }
 
-    void OnJumpPerformed(bool isJumping)
+    void OnJumpPerformed(InputAction.CallbackContext context)
     {
-        
+        PlayerEvents.RaiseJumpPerformed(true);
     }
     
 }
