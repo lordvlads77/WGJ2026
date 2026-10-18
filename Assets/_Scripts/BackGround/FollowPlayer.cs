@@ -4,6 +4,7 @@ using UnityEngine;
 public class FollowPlayer : MonoBehaviour
 {
     [SerializeField] private Transform _playerTransform;
+    [SerializeField] private float _followThresholdX;
     [SerializeField] private float _followThresholdY;
     [SerializeField] private float _followOffsetX;
 
@@ -23,6 +24,15 @@ public class FollowPlayer : MonoBehaviour
     private void PlayerFollower()
     {
         if (_playerTransform.position.y < _followThresholdY) return;
-        _transform.position = new Vector3(_playerTransform.position.x,0,0) + new Vector3(_followOffsetX, 5, 5);
+        if (_playerTransform.position.x > _transform.position.x + _followThresholdX || _playerTransform.position.x < _transform.position.x - _followThresholdX)
+        {
+            Vector3 _targetPos = new Vector3(_playerTransform.position.x+_followOffsetX, 5.5f, 5f);
+            _transform.position = Vector3.Lerp(_transform.position, _targetPos, 1f * Time.deltaTime);
+        }else if (_playerTransform.position.x < _transform.position.x - _followThresholdX)
+        {
+            Vector3 _targetPos = new Vector3(_playerTransform.position.x-_followOffsetX, 5.5f, 5f);
+            _transform.position = Vector3.Lerp(_transform.position, _targetPos, 1f * Time.deltaTime);
+        }
+       
     }
 }
