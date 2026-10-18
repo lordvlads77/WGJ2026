@@ -8112,6 +8112,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1953867417}
     - target: {fileID: 6506502162818755093, guid: 572c76255a238d4438d91d756783be55, type: 3}
+      propertyPath: _canMoveRight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6506502162818755093, guid: 572c76255a238d4438d91d756783be55, type: 3}
       propertyPath: _canSlowBackwards
       value: 1
       objectReference: {fileID: 0}
