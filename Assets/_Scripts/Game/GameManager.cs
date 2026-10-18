@@ -52,7 +52,8 @@ public enum GameState
 {
     OnPlay,
     OnPause,
-    OnGameOver
+    OnGameOver,
+    OnRespawn
 }
 
 public interface IGameSource

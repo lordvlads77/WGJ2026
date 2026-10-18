@@ -15,6 +15,8 @@ public class DebugInput : Singleton<IDebugInputSource>, IDebugInputSource
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
+            if (GameManager.Source.CurrentGameState == GameState.OnRespawn) return;
+
             if (GameManager.Source.CurrentGameState != GameState.OnPause)
             {
                 OnPauseButtonPressed?.Invoke();
