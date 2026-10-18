@@ -71,6 +71,10 @@ MonoBehaviour:
   _moveDistance: 5
   _duration: 3
   _easeType: 4
+  _visual: {fileID: 2066772174979318932}
+  _hopHeight: 0.15
+  _hopsPerTrip: 4
+  _squashAmount: 0.08
 --- !u!1001 &1955722406520726399
 PrefabInstance:
   m_ObjectHideFlags: 0
