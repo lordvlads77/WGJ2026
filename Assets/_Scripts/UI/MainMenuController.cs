@@ -7,17 +7,21 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private Button _closeSettingsButton;
     [SerializeField] private Button _creditsButton;
     [SerializeField] private Button _closeCreditsButton;
+    [SerializeField] private Button _openComicButton;
+    [SerializeField] private Button _closeComicButton;
     [SerializeField] private Button _exitButton;
 
     [SerializeField] private Canvas _settingsCanvas;
     [SerializeField] private Canvas _creditsCanvas;
     [SerializeField] private Canvas _menuCanvas;
+    [SerializeField] private Canvas _comicCanvas;
 
     private void Awake()
     {
         _menuCanvas.enabled = true;
         _settingsCanvas.enabled = false;
         _creditsCanvas.enabled = false;
+        _comicCanvas.enabled = false;
     }
 
     private void Start()
@@ -26,6 +30,8 @@ public class MainMenuController : MonoBehaviour
         _closeSettingsButton.onClick.AddListener(CloseSettingsScreen);
         _creditsButton.onClick.AddListener(OpenCreditsScreen);
         _closeCreditsButton.onClick.AddListener(CloseCreditsScreen);
+        _openComicButton.onClick.AddListener(OpenComicScreen);
+        _closeComicButton.onClick.AddListener(CloseComicScreen);
         _exitButton.onClick.AddListener(ExitGame);
     }
 
@@ -55,6 +61,17 @@ public class MainMenuController : MonoBehaviour
     {
         _menuCanvas.enabled = true;
         canvasName.enabled = false;
+    }
+
+    private void OpenComicScreen()
+    {
+        _comicCanvas.enabled = true;
+        _menuCanvas.enabled = false;
+    }
+
+    private void CloseComicScreen()
+    {
+        BackToMenu(_comicCanvas);
     }
 
     private void ExitGame()

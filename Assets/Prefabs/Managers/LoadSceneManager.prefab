@@ -877,7 +877,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadSceneManager
   _isPersistent: 1
-  _asyncScenes: []
+  _asyncScenes:
+  - Cave
   _loadingScreen: {fileID: 1236943365760505222}
   _progressBar: {fileID: 3947064385096743599}
   _loadingIcon: {fileID: 8148560800696767870}

@@ -4,59 +4,81 @@ using UnityEngine;
 
 public class GhostEnemy : MonoBehaviour
 {
-    Material mat;
-    [SerializeField]private float _MaxEmission;
-    [SerializeField]private float _MaxAlpha;
-    [SerializeField]private Color _CustomColor;
+    private static readonly int AlphaId = Shader.PropertyToID("_Alpha");
+    private static readonly int EmissionColorId = Shader.PropertyToID("_EmissionColor");
+    private static readonly int EmissionIntensityId = Shader.PropertyToID("_EmissionIntensity");
 
+    [SerializeField] private float _MaxEmission;
+    [SerializeField] private float _MaxAlpha;
+    [SerializeField] private Color _CustomColor;
+    [SerializeField, Range(0f, 1f)] private float _lethalThreshold = 0.9f;
+
+    private Material _mat;
     private float _currentEmission;
     private float _currentAlpha;
+    private ResetPlayer _playerInContact;
+
+    private bool IsLethal => _MaxEmission > 0f && _currentEmission >= _MaxEmission * _lethalThreshold;
 
     private void Awake()
     {
-        mat = GetComponentInChildren<Renderer>().material;
-
+        _mat = GetComponentInChildren<Renderer>().material;
     }
 
-    void Start()
+    private void Start()
     {
-        mat.SetFloat("_Alpha", _MaxAlpha);
-        mat.SetColor("_EmissionColor", _CustomColor);
-        mat.SetFloat("_EmissionIntensity", _MaxEmission);
-        
+        _mat.SetFloat(AlphaId, _MaxAlpha);
+        _mat.SetColor(EmissionColorId, _CustomColor);
+        _mat.SetFloat(EmissionIntensityId, _MaxEmission);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnDestroy()
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (_mat != null)
         {
-            collision.collider.TryGetComponent(out ResetPlayer _resetPlayer);
-            _resetPlayer.PlayerReset();
+            Destroy(_mat);
         }
     }
 
-    void Update()
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && collision.TryGetComponent(out ResetPlayer resetPlayer))
+        {
+            _playerInContact = resetPlayer;
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player") && other.TryGetComponent(out ResetPlayer resetPlayer))
+        {
+            _playerInContact = resetPlayer;
+        }
+    }
+
+    private void OnTriggerExit(Collider collision)
+    {
+        if (_playerInContact != null && collision.gameObject == _playerInContact.gameObject)
+        {
+            _playerInContact = null;
+        }
+    }
+
+    private void Update()
     {
         float t = Mathf.PingPong(Time.time / 2f, 1f);
         t = t * t * t;
-        mat.SetFloat("_Alpha", t * _MaxAlpha);
-        mat.SetFloat("_EmissionIntensity", t * _MaxEmission);
-    }
 
-    /*private IEnumerator GhostRoutine()
-    {
-        while (true)
+        _currentAlpha = t * _MaxAlpha;
+        _currentEmission = t * _MaxEmission;
+
+        _mat.SetFloat(AlphaId, _currentAlpha);
+        _mat.SetFloat(EmissionIntensityId, _currentEmission);
+
+        if (_playerInContact != null && IsLethal)
         {
-            mat.SetFloat("_Alpha", Mathf.Lerp(_MaxAlpha, 0, 0.25f * Time.deltaTime));
-            mat.SetFloat("_EmissionIntensity", Mathf.Lerp(_MaxEmission, 0, 0.25f * Time.deltaTime));
-     
-            yield return new WaitForSeconds(2f);
-
-            mat.SetFloat("_Alpha", Mathf.Lerp(0, _MaxAlpha, 0.25f * Time.deltaTime));
-            mat.SetFloat("_EmissionIntensity", Mathf.Lerp(0, _MaxEmission, 0.25f * Time.deltaTime));
-
-            yield return new WaitForSeconds(2f);
-            yield return null;
+            _playerInContact.PlayerReset();
+            _playerInContact = null;
         }
-   } */
+    }
 }
