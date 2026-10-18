@@ -17,7 +17,7 @@ public class ResetPlayer : MonoBehaviour
         _playerTransform.position = _initialPosition;
     }
 
-    private void PlayerReset()
+    public void PlayerReset()
     {
         transform.position = _initialPosition;
     }
