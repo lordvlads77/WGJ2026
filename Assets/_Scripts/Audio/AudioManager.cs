@@ -96,6 +96,9 @@ public class AudioManager : Singleton<IAudioSource>, IAudioSource
     {
         _sfxAudioSource.PlayOneShot(_audioDatabase.GetAudio(audioName));
     }
+
+    public void PlayHoverSFX() => PlayOneShot("Hover");
+    public void PlaySelectSFX() => PlayOneShot("Select");
 }
 
 public interface IAudioSource
@@ -113,4 +116,7 @@ public interface IAudioSource
 
     void PlayLevelMusic(string audioName);
     void PlayOneShot(string audioName);
+
+    void PlayHoverSFX();
+    void PlaySelectSFX();
 }

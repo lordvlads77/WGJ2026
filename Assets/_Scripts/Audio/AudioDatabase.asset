@@ -13,5 +13,15 @@ MonoBehaviour:
   m_Name: AudioDatabase
   m_EditorClassIdentifier: Assembly-CSharp::AudioDatabase
   _audioData:
-  - audio: {fileID: 0}
-    audioName: 
+  - audio: {fileID: 8300000, guid: a7789d40c863c8d42bb5e61d068fd0e2, type: 3}
+    audioName: Comic
+  - audio: {fileID: 8300000, guid: 704a22963bea576418084f2ce6a3a513, type: 3}
+    audioName: LevelCave
+  - audio: {fileID: 8300000, guid: daf42ffade2cb1b488885b5ec1b1e6d5, type: 3}
+    audioName: MainMenu
+  - audio: {fileID: 8300000, guid: b2357b53a9389414aa7fe173c9053893, type: 3}
+    audioName: Credits
+  - audio: {fileID: 8300000, guid: 9e4400d89261fc24dae4df6a0532d458, type: 3}
+    audioName: Hover
+  - audio: {fileID: 8300000, guid: b65c624479614f140b81b28e7340ec2c, type: 3}
+    audioName: Select
