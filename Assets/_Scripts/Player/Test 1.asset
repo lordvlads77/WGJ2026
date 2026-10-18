@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c393648700b2c9d41b59eb86e2106b3f, type: 3}
+  m_Name: Test 1
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerVariables
+  _baseMoveSpeed: 5
+  _sprintMultiplier: 1.5
+  _jumpForce: 10
+  _slowdownMultiplier: 0.25
