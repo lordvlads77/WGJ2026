@@ -6,11 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Comic.unity
+    guid: fa4dcf30fe4eb8f40a0a70503f498f0d
+  - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: a12bccffb4c727749bcdc99cc7c7e08d
   - enabled: 1
     path: Assets/Scenes/Levels/Cave.unity
     guid: c159dc0c6553b4b459235b73584d93d8
+  - enabled: 1
+    path: Assets/Scenes/CreditsScene.unity
+    guid: 71acf057c6ceabe4a86b20285d8874b1
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

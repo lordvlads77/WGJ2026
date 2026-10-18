@@ -12,12 +12,15 @@ public class CreditScene : MonoBehaviour
     [SerializeField] private float _timerUntilNext = 3f;
     [SerializeField] private Ease _ease;
 
+    [SerializeField] private Button _button;
+
     private float _maxTimerTime;
     private Tween _titleTween;
 
     private void Start()
     {
         ScrollCredits();
+        _button.onClick.AddListener(ReturnToMainMenu);
     }
 
     private void ScrollCredits()
@@ -32,7 +35,12 @@ public class CreditScene : MonoBehaviour
             delay += _timerUntilNext;            
             
         }
-        _titleTween.OnComplete(() => SceneManager.LoadScene("Test_MainMenu"));
+        _titleTween.OnComplete(() => LoadSceneManager.Source.LoadScene("Menu"));
+    }
+
+    private void ReturnToMainMenu()
+    {
+        LoadSceneManager.Source.LoadScene("Menu");
     }
 }
 

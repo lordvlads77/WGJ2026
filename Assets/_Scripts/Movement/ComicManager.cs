@@ -1,6 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ComicManager : MonoBehaviour
 {
@@ -9,11 +10,14 @@ public class ComicManager : MonoBehaviour
     [SerializeField] private float _moveDuration = 1f;
     [SerializeField] private float _waitTime = 3f;
     [SerializeField] private Ease _ease = Ease.InOutSine;
+    [SerializeField] private Button _button;
 
     private Tween _cameraTween;
 
     private void Start()
     {
+        _button.onClick.AddListener(SkipComic);
+
         float delay = 0f;
 
         foreach (Transform panel in _panelPositions)
@@ -26,6 +30,11 @@ public class ComicManager : MonoBehaviour
         }
 
         _cameraTween.OnComplete(() =>
-            DOVirtual.DelayedCall(_waitTime, () => SceneManager.LoadScene("Test_MainMenu")));
+            DOVirtual.DelayedCall(_waitTime, () => SceneManager.LoadScene("Menu")));
+    }
+
+    private void SkipComic()
+    {
+        SceneManager.LoadScene("Menu");
     }
 }

@@ -18,6 +18,16 @@ public class ResetPlayer : MonoBehaviour
         _initialPosition = transform.position;
     }
 
+    private void OnEnable()
+    {
+        GameOverController.OnRestartClicked += RestartLevel;
+    }
+
+    private void OnDisable()
+    {
+        GameOverController.OnRestartClicked -= RestartLevel;
+    }
+
     public void PlayerReset()
     {
         if (_isResetting) return;
@@ -62,5 +72,24 @@ public class ResetPlayer : MonoBehaviour
         {
             _cameraFollow.SnapToTarget();
         }
+    }
+
+    private void RestartLevel()
+    {
+        StartReset();
+    }
+
+    private void StartReset()
+    {
+        if (_isResetting) return;
+
+        if (_transition == null)
+        {
+            TeleportToStart();
+            GameManager.Source.ChangeState(GameState.OnPlay);
+            return;
+        }
+
+        PlayerResetAsync(destroyCancellationToken).Forget();
     }
 }
