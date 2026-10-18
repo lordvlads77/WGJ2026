@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c393648700b2c9d41b59eb86e2106b3f, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: Assembly-CSharp::PlayerVariables
-  _baseMoveSpeed: 5
+  _baseMoveSpeed: 6
   _sprintMultiplier: 1.5
-  _jumpForce: 10
-  _slowdownMultiplier: 0.25
+  _jumpForce: 7
+  _slowdownMultiplier: 0.4

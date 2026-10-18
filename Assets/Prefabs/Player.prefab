@@ -191,4 +191,4 @@ MonoBehaviour:
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  _canSlowBackwards: 0
+  _canSlowBackwards: 1
