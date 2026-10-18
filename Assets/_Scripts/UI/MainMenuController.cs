@@ -37,6 +37,7 @@ public class MainMenuController : MonoBehaviour
 
     private void OpenSettingsScreen()
     {
+        AudioManager.Source.PlaySelectSFX();
         _settingsCanvas.enabled = true;
         _menuCanvas.enabled = false;
     }
@@ -48,6 +49,7 @@ public class MainMenuController : MonoBehaviour
 
     private void OpenCreditsScreen()
     {
+        AudioManager.Source.PlaySelectSFX();
         _creditsCanvas.enabled = true;
         _menuCanvas.enabled = false;
     }
@@ -59,12 +61,14 @@ public class MainMenuController : MonoBehaviour
 
     private void BackToMenu(Canvas canvasName)
     {
+        AudioManager.Source.PlaySelectSFX();
         _menuCanvas.enabled = true;
         canvasName.enabled = false;
     }
 
     private void OpenComicScreen()
     {
+        AudioManager.Source.PlaySelectSFX();
         _comicCanvas.enabled = true;
         _menuCanvas.enabled = false;
     }
