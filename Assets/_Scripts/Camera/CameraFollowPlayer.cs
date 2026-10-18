@@ -18,9 +18,19 @@ public class CameraFollowPlayer : MonoBehaviour
         _cameraTransform = GetComponent<Transform>();
     }
 
+    void OnDestroy()
+    {
+        PlayerEvents.OnMove -= OnPlayermove;
+    }
+
     void LateUpdate()
     {
         _cameraTransform.position = Vector3.Lerp(_cameraTransform.position,_playerTransform.position + _followOffset,0.75f * Time.deltaTime);
+    }
+
+    public void SnapToTarget()
+    {
+        transform.position = _playerTransform.position + _followOffset;
     }
 
     void OnPlayermove(bool isMoving,Vector2 direction)
