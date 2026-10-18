@@ -15,7 +15,6 @@ public class AudioManager : Singleton<IAudioSource>, IAudioSource
     [SerializeField] private AudioMixer _audioMixer;
     [SerializeField] private AudioSource _sfxAudioSource;
     [SerializeField] private AudioSource _bgmAudioSource;
-    [SerializeField] private AudioSource _ambientAudioSource;
 
     public float CurrentSFXVolume { get; private set; }
     public float CurrentMusicVolume { get; private set; }
@@ -97,18 +96,6 @@ public class AudioManager : Singleton<IAudioSource>, IAudioSource
     {
         _sfxAudioSource.PlayOneShot(_audioDatabase.GetAudio(audioName));
     }
-
-    public void PlayAmbientAudio(string audioName)
-    {
-        _ambientAudioSource.clip = _audioDatabase.GetAudio(audioName);
-        _ambientAudioSource.Play();
-    }
-
-    public void StopAmbientAudio()
-    {
-        _ambientAudioSource.Stop();
-    }
-
 }
 
 public interface IAudioSource
@@ -126,6 +113,4 @@ public interface IAudioSource
 
     void PlayLevelMusic(string audioName);
     void PlayOneShot(string audioName);
-    void PlayAmbientAudio(string audioName);
-    void StopAmbientAudio();
 }

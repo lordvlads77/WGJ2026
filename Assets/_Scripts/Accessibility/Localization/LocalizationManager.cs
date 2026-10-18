@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LocalizationManager : Singleton<ILocalizationSource>, ILocalizationSource
 {
-    public static readonly string[] Languages = { "English", "Spanish", "Portuguese", "Japanese" };
+    public static readonly string[] Languages = { "English", "Spanish", "Portuguese" };
     public string CurrentLanguage => _currentLanguage;
     public event Action OnLanguageChanged;
 

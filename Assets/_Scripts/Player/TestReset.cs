@@ -5,9 +5,8 @@ public class TestReset : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && other.TryGetComponent(out ResetPlayer resetPlayer))
         {
-            other.TryGetComponent(out ResetPlayer resetPlayer);
             resetPlayer.PlayerReset();
         }
     }
