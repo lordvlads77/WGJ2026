@@ -3137,7 +3137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2259420986893802896, guid: 7f6e776ddcc4d0f47af454c1915c1d83, type: 3}
       propertyPath: _duration
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2259420986893802896, guid: 7f6e776ddcc4d0f47af454c1915c1d83, type: 3}
       propertyPath: _moveDistance
