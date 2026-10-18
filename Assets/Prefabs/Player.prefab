@@ -188,11 +188,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a5db10af6972b54dbc9f6104bbad9d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  _playerVariables: {fileID: 11400000, guid: c7f8884ea3bc4a947bced7e058472a28, type: 2}
+  _playerVariables: {fileID: 11400000, guid: 342f247bb1f32104b98816a6df8ac9df, type: 2}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  _canSlowBackwards: 1
+  _canSlowBackwards: 0
   _canMoveRight: 0
 --- !u!114 &3549248912684304641
 MonoBehaviour:

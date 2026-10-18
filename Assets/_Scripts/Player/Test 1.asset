@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerVariables
   _baseMoveSpeed: 5
   _sprintMultiplier: 1.5
-  _jumpForce: 10
+  _jumpForce: 0
   _slowdownMultiplier: 0.25
