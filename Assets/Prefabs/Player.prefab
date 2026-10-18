@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: 2666516005191338913}
   - component: {fileID: 1166543214393718151}
   - component: {fileID: 6506502162818755093}
+  - component: {fileID: 3549248912684304641}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -118,7 +119,7 @@ Transform:
   m_GameObject: {fileID: 1999123671006775958}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.095, z: 1.7}
+  m_LocalPosition: {x: -4.5381665, y: -7.57778, z: -7.652019}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -192,3 +193,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   _canSlowBackwards: 1
+  _canMoveRight: 0
+--- !u!114 &3549248912684304641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999123671006775958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c67f08cb2a89354fac1483502162dd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ResetPlayer
