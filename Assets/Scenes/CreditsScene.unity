@@ -1531,6 +1531,51 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1696936045
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1696936047}
+  - component: {fileID: 1696936046}
+  m_Layer: 0
+  m_Name: SceneBackgroundMusic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1696936046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696936045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c409f365187274c4e9cb88f1eb8ac8fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneBackgroundMusic
+  _musicName: Credits
+--- !u!4 &1696936047
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1696936045}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -24.20169, y: 0, z: 3.02917}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1865481864
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1796,6 +1841,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2070651333
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1879850969272288130, guid: 8ba17f92eba44084ea2df0626f24bb85, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -24.20169
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879850969272288130, guid: 8ba17f92eba44084ea2df0626f24bb85, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879850969272288130, guid: 8ba17f92eba44084ea2df0626f24bb85, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.02917
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879850969272288130, guid: 8ba17f92eba44084ea2df0626f24bb85, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879850969272288130, guid: 8ba17f92eba44084ea2df0626f24bb85, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879850969272288130, guid: 8ba17f92eba44084ea2df0626f24bb85, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879850969272288130, guid: 8ba17f92eba44084ea2df0626f24bb85, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879850969272288130, guid: 8ba17f92eba44084ea2df0626f24bb85, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879850969272288130, guid: 8ba17f92eba44084ea2df0626f24bb85, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1879850969272288130, guid: 8ba17f92eba44084ea2df0626f24bb85, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3792381478210843915, guid: 8ba17f92eba44084ea2df0626f24bb85, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8ba17f92eba44084ea2df0626f24bb85, type: 3}
 --- !u!1001 &2126828965
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1866,3 +1968,5 @@ SceneRoots:
   - {fileID: 1044339116}
   - {fileID: 2126828965}
   - {fileID: 1865481864}
+  - {fileID: 2070651333}
+  - {fileID: 1696936047}
