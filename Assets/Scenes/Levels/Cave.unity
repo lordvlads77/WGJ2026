@@ -8408,8 +8408,12 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6506502162818755093, guid: 572c76255a238d4438d91d756783be55, type: 3}
+      propertyPath: _playerVariables
+      value: 
+      objectReference: {fileID: 11400000, guid: c7f8884ea3bc4a947bced7e058472a28, type: 2}
+    - target: {fileID: 6506502162818755093, guid: 572c76255a238d4438d91d756783be55, type: 3}
       propertyPath: _canSlowBackwards
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8517821323590050460, guid: 572c76255a238d4438d91d756783be55, type: 3}
       propertyPath: m_LocalPosition.x
