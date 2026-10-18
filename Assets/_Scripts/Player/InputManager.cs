@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,22 +5,9 @@ public class InputManager : MonoBehaviour
 {
     private InputSystem_Actions _inputActions;
 
-    private InputAction _verticalMoveAction;
-    private InputAction _horizontalMoveAction;
     private InputAction _moveAction;
     private InputAction _jumpAction;
-    
-    private float _verticalMoveDirection;
-    private float _horizontalMoveDirection;
 
-    private Vector2 _moveDirection;
-    
-    private bool _isMovingVertically;
-    private bool _isMovingHorizontally;
-    private bool _isMoving = false;
-    private bool _isJumping = false;
-    
-    
     void Awake()
     {
         _inputActions = new InputSystem_Actions();
@@ -29,23 +15,53 @@ public class InputManager : MonoBehaviour
         _jumpAction = _inputActions.Player.Jump;
     }
 
+    void Start()
+    {
+        GameManager.Source.OnGameStateChanged += OnGameStateChanged;
+        OnGameStateChanged(GameManager.Source.CurrentGameState);
+    }
+
     void OnEnable()
     {
-
-        _inputActions.Enable();
-
         _moveAction.performed += OnMovePerformed;
         _moveAction.canceled += OnMoveCancelled;
         _jumpAction.performed += OnJumpPerformed;
+
+        _inputActions.Enable();
+
+        if (GameManager.Source != null)
+        {
+            OnGameStateChanged(GameManager.Source.CurrentGameState);
+        }
     }
 
     void OnDisable()
     {
-        _inputActions.Disable();
         _moveAction.performed -= OnMovePerformed;
         _moveAction.canceled -= OnMoveCancelled;
+        _jumpAction.performed -= OnJumpPerformed;
 
         _inputActions.Disable();
+    }
+
+    void OnDestroy()
+    {
+        if (GameManager.Source != null)
+        {
+            GameManager.Source.OnGameStateChanged -= OnGameStateChanged;
+        }
+    }
+
+    private void OnGameStateChanged(GameState state)
+    {
+        if (state == GameState.OnPlay)
+        {
+            _inputActions.Player.Enable();
+        }
+        else
+        {
+            _inputActions.Player.Disable();
+        }
     }
 
     private void OnMovePerformed(InputAction.CallbackContext context)
@@ -64,5 +80,4 @@ public class InputManager : MonoBehaviour
     {
         PlayerEvents.RaiseJumpPerformed(true);
     }
-    
 }
