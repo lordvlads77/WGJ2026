@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PlayerVariables _playerVariables;
     [SerializeField] private LayerMask _groundLayer;
     [SerializeField] private bool _canSlowBackwards;
+    [SerializeField] private bool _canMoveRight;
     
     private Rigidbody _playerRigidbody;
     private float _moveSpeed;
@@ -60,12 +61,22 @@ public class PlayerMovement : MonoBehaviour
     private void MoveCharacter()
     {
         Vector3 velocity = _playerRigidbody.linearVelocity;
-        
-        if(velocity.x > 0) velocity.x = _moveDirection.x * _moveSpeed;
-        if(velocity.x < 0 && _canSlowBackwards) velocity.x = (_moveDirection.x * _moveSpeed) * _playerVariables.SlowdownMultiplier;
-        else velocity.x = _moveDirection.x * _moveSpeed;
-        velocity.z = _moveDirection.z * _moveSpeed;
 
+        if (_moveDirection.x > 0f && _canMoveRight)
+        {
+            velocity.x = 0f;
+        }
+        else if (_moveDirection.x < 0f)
+        {
+            float speed = _canSlowBackwards ? _moveSpeed * _playerVariables.SlowdownMultiplier : _moveSpeed;
+            velocity.x = _moveDirection.x * speed;
+        }
+        else
+        {
+            velocity.x = _moveDirection.x * _moveSpeed;
+        }
+
+        velocity.z = _moveDirection.z * _moveSpeed;
         _playerRigidbody.linearVelocity = velocity;
     }
 
